@@ -51,11 +51,22 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   - **Proibido Conventional Commits**: Não use prefixos como `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, etc. Use apenas uma frase descritiva em inglês (ex: `configure better-auth with drizzle adapter`, `update env validation error format`, `add agent workflow rule forbidding browser and manual tests`).
 - **Fluxo de Branches (`development` ➔ `main`)**: O padrão do projeto opera com duas branches principais: `development` e `main`. **Toda e qualquer alteração é feita obrigatoriamente na branch `development`**. A branch `main` só recebe código validado, testado e aprovado através de merge da `development`.
 
-### 8. Fluxo de Trabalho do Agente (Sem Navegador / Sem Testes Manuais)
+### 8. Fluxo de Trabalho do Agente (Sem Navegador / Sem Commits Prematuros)
 - **Proibido Abrir Navegador:** O agente **NUNCA deve abrir o navegador** (ferramentas de browser ou subagents de navegação) nem tentar realizar testes visuais ou manuais de interface.
+- **Proibido Commit Prematuro:** O agente **NUNCA deve commitar código automaticamente** ao concluir uma tarefa ou implementação de spec. Commits só ocorrem após validação manual e aprovação explícita do usuário.
 - **Ciclo Obrigatório de Execução:** O fluxo de trabalho do agente opera estritamente em 3 etapas:
   1. **Implementar**: Escrever o código seguindo as regras canônicas e validar estaticamente no terminal (`pnpm lint` e `pnpm build`).
-  2. **Entregar Resumo**: Apresentar um resumo conciso, claro e objetivo das alterações realizadas.
-  3. **Aguardar Feedback**: Parar a execução e aguardar a validação e o direcionamento do usuário antes de qualquer nova ação.
+  2. **Entregar Resumo**: Apresentar um resumo conciso, claro e objetivo das alterações realizadas (sem commitar e sem arquivar specs).
+  3. **Aguardar Feedback**: Parar a execução e aguardar a validação manual, testes e direcionamento do usuário antes de qualquer nova ação ou commit.
+
+### 9. Metodologia de Planejamento e Especificações (Spec-Craft / Spec-Lean)
+- Ao planejar funcionalidades, novos módulos ou refatorações estruturais, utilize obrigatoriamente a skill em `.agents/skills/spec-craft/`:
+  1. **Boot & Progressive Disclosure**: Consulte `.specs/STATE.md` (ADRs e próximo `<NNN>`) e `.specs/LESSONS.md` (armadilhas conhecidas) antes de qualquer proposta técnica.
+  2. **Contrato Congelado**: Gere `plan.md` e `checks.md` em `.specs/features/<NNN-slug>/`. A codificação só começa após a aprovação explícita do usuário.
+  3. **Validação & Handoff**: Ao concluir o build, valide estaticamente (`pnpm lint && pnpm build`), gere `verification.md` e aguarde a validação manual do usuário. **É proibido commitar ou arquivar a spec nesta etapa**.
+  4. **Fechamento Zero-Acúmulo no Git**: Somente após a aprovação manual explícita e ajustes concluídos:
+     a) Execute o commit da feature incluindo a pasta da spec `.specs/features/<NNN-slug>/` (congelando o contrato para sempre no histórico do Git).
+     b) Remova a pasta `.specs/features/<NNN-slug>/` da árvore ativa (`git rm -r`), registre o hash do commit no histórico em `.specs/STATE.md` e realize o commit de limpeza. Nenhuma pasta de arquivo morto de specs permanece em disco.
+
 
 

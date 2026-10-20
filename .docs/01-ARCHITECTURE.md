@@ -109,3 +109,4 @@ Para o passo a passo detalhado de cada camada, consulte:
 * **[02-MODULES.md](./02-MODULES.md)**: Guia completo de Vertical Slices, anatomia de pastas, Public API e convenções de módulos.
 * **[03-DATABASE.md](./03-DATABASE.md)**: Modelagem de schemas, Drizzle ORM, convenções SQL e fluxo de migrações.
 * **[04-SHARED.md](./04-SHARED.md)**: Diretrizes da camada de fundação, estilos, componentes genéricos e env.
+* **Planejamento & Specs (`.specs/`)**: Para engenharia de novas features via especificações e decisões arquiteturais (ADRs), consulte a skill **Spec-Craft** em `.agents/skills/spec-craft/` e o estado em `.specs/STATE.md`.
